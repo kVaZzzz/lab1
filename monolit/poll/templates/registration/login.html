@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="margin-left: 80px;">
+    <h4 style="padding: 1rem; margin-bottom: 1rem; border: 1px solid #ccc;">Авторизация</h4>
+    {% if request.user.is_authenticated %}
+    <p>Вы уже выполнили вход. <a href="{% url 'logout' %}">Выйти.</a></p>
+    {% else %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div style="margin-bottom: 1rem;">
+            <label>Логин:</label>
+            {{ form.username }}
+            {{ form.username.errors }}
+        </div>
+        <div style="margin-bottom: 1rem;">
+            <label>Пароль:</label>
+            {{ form.password }}
+            {{ form.password.errors }}
+        </div>
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit">Войти</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

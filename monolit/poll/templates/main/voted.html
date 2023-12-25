@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3>{{ post.name }}</h3>
+    {% if post.photo %}
+        <img style="max-height: 500px;" src="{{ post.photo.url }}" alt="Аватар">
+    {% endif %}
+    <p>{{ post.content }}</p>
+
+    <h3>Ответы</h3>
+    <form method="post">
+        {% csrf_token %}
+        {% for i in vote_data %}
+        <div>
+            <p>{{ i.choice }} - проголосовало {{ i.percent }}%</p>
+        </div>
+        {% endfor %}
+    </form>
+
+{% endblock %}

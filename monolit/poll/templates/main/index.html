@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title%}Главная{% endblock%}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h3>Опросы</h3>
+{% if list %}
+<ul>
+    {% for post in list %}
+    <li><a href="{% url 'detail' post.id %}">{{post.name}}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>
+    Нет опросов!
+</p>
+{% endif %}
+{% else %}
+<h3>Вы должны авторизироваться чтобы увидеть опросы!</h3>
+{% endif %}
+{% endblock %}

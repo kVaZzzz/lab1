@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3>Привет {{ user.username }}</h3>
+    {% if user.avatar %}
+        <img style="max-height: 50px;" src="{{ user.avatar.url }}" alt="Аватар">
+    {% else %}
+        <img style="max-height: 50px;" src="/files/photo/default.jpg" alt="Аватар дефолтный">
+    {% endif %}
+    <p>Ваше имя: {{ user.name }}</p>
+    <p>Ваша фамилия: {{ user.last_name }}</p>
+    <p>Ваш логин: {{ user.username }}</p>
+    <p>Ваша почта: {{ user.email }}</p>
+    <a href="{% url 'update' profile.pk %}">Редактировать профиль</a>
+    <form action="{% url 'delete' profile.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Удалить профиль</button>
+    </form>
+{% endblock %}
+
